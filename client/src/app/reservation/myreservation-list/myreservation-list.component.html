@@ -1,0 +1,32 @@
+<div class="row" *ngIf="reservations"></div>
+    <div class="container-fluid">
+        <table style="background-color: azure; border-color: black;" class="table table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">Number of reserved seats</th>
+                <th scope="col">Reservation status</th>
+                <th scope="col">Flight</th>
+                
+              
+              </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let reservation of reservations">
+                <tr>
+                    <td>{{reservation.reservedSeats}}</td>
+                    <td *ngIf="reservation.status ==true"> Reservation approved</td>
+                    <td *ngIf="reservation.status == false">Reservation not approved</td>
+                    <td><a style="color: blue;" class="nav-link" routerLink="/flightDetail/{{reservation.flightId}}" routerLinkActive="active">View flight</a></td>
+      
+                    
+                    
+                </tr>
+            </ng-container>
+            </tbody>
+          </table>
+      </div>
+
+
+
+
+

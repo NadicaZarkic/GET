@@ -1,0 +1,34 @@
+<div class="container-fluid">
+  <table style="background-color: azure; border-color: black;" class="table table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">Place of departure</th>
+          <th scope="col">Place of arrival</th>
+          <th scope="col">Date</th>
+          <th scope="col">Number of transfers</th>
+          <th scope="col">Number of free seats</th>
+          <th *ngIf="roleId == 3"></th>
+        </tr>
+      </thead>
+      <tbody>
+          <ng-container *ngFor="let flight of flights">
+          <tr>
+              <td>{{flight.placeOfDeparture}}</td>
+              <td>{{flight.placeOfArrival}}</td>
+              <td >{{flight.date | date: "MM-dd-yyyy"}} {{flight.date | date: "HH:mm:ss"}}</td>
+              <td>{{flight.transfers}}</td>
+              <td [ngClass]="{
+                'smallNumberOfSeats' : flight.seats <5 }">{{flight.seats}}</td>
+               <td *ngIf="roleId == 3"> 
+                <a class="nav-link" routerLink="/cancelFlight/{{flight.flightId}}" routerLinkActive="active">Change flight date</a>
+               </td>
+               <td *ngIf="roleId == 1"> 
+                <a class="nav-link" routerLink="/bookFlight/{{flight.flightId}}" routerLinkActive="active">Book a flight</a>
+               </td>
+          </tr>
+      </ng-container>
+      </tbody>
+    </table>
+
+</div>
+

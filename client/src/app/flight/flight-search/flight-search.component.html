@@ -1,0 +1,76 @@
+<div class="container mt-3" *ngIf="flightParams">
+    <form #form="ngForm" class="d-flex mb-3" (ngSubmit)="loadFlights()" autocomplete="off">
+        <div class="d-flex mx-2">
+            
+            <div style="margin: 10px;">
+                <select
+                class="col-form-label"
+                name="placeOfDeparture" 
+                [(ngModel)]="flightParams.placeOfDeparture"  >
+                <option value="">Choose place of departure</option>
+                <option  *ngFor="let city of City" >
+                {{ city }}
+                </option>
+            </select>
+        </div>
+        </div>
+        <div class="d-flex mx-2">
+            <div style="margin: 10px;">
+                <select
+                class="col-form-label" 
+                name="placeOfArrival" 
+                [(ngModel)]="flightParams.placeOfArrival"  >
+                <option value="">Choose place of arrival</option>
+                <option  *ngFor="let city of City" >
+                {{ city }}
+                </option>
+            </select>
+        </div>
+    </div>
+
+          <input type="checkbox" name="transfers" [(ngModel)]="flightParams.transfers">Show transfers
+
+
+        
+
+       
+
+        <button class="btn btn-primary ms-1" type="submit">Apply Filters</button>
+      
+
+    </form>
+</div>
+
+
+
+
+<div class="container-fluid">
+    <table style="background-color: azure; border-color: black;" class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Place of departure</th>
+            <th scope="col">Place of arrival</th>
+            <th scope="col">Date</th>
+            <th scope="col">Number of transfers</th>
+            <th scope="col">Number of free seats</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let flight of flights">
+            <tr>
+                <td>{{flight.placeOfDeparture}}</td>
+                <td>{{flight.placeOfArrival}}</td>
+                <td >{{flight.date | date: "MM-dd-yyyy"}} {{flight.date | date: "HH:mm:ss"}}</td>
+                <td>{{flight.transfers}}</td>
+                <td [ngClass]="{
+                  'smallNumberOfSeats' : flight.seats <5 }">{{flight.seats}}</td>
+                
+            </tr>
+        </ng-container>
+        </tbody>
+      </table>
+  </div>
+
+
+

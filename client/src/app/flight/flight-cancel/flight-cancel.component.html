@@ -1,0 +1,30 @@
+<div class="row">
+
+    <div class="col-3">
+
+        <h3>Change flight date</h3>
+
+         
+
+            <div class="col-8">
+               
+             <form #editForm="ngForm" id="editForm" (ngSubmit)="updateFlight(editForm.value)">
+                        
+
+
+                <label class="col-form-label">Date of flight: </label>
+                            <input 
+                                type="datetime-local" 
+                                class="form-control ms-1" 
+                                style="width: 300px" 
+                                
+                               name="dataValue"  ngModel >
+                 
+                      
+                               <input type = "submit" value = "Edit date">
+                       </form>
+             </div>
+        </div>
+</div>
+
+

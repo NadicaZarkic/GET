@@ -1,0 +1,29 @@
+<div *ngIf="flight">
+<div class="container-fluid">
+    <table style="background-color: azure; border-color: black;" class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Place of departure</th>
+            <th scope="col">Place of arrival</th>
+            <th scope="col">Date</th>
+            <th scope="col">Number of transfers</th>
+            <th scope="col">Number of free seats</th>
+           
+          </tr>
+        </thead>
+        <tbody>
+      
+            <tr>
+                <td>{{flight.placeOfDeparture}}</td>
+                <td>{{flight.placeOfArrival}}</td>
+                <td >{{flight.date | date: "MM-dd-yyyy"}} {{flight.date | date: "HH:mm:ss"}}</td>
+                <td>{{flight.transfers}}</td>
+                <td [ngClass]="{
+                  'smallNumberOfSeats' : flight.seats <5 }">{{flight.seats}}</td>
+                
+            </tr>
+       
+        </tbody>
+      </table>
+  </div>
+</div>

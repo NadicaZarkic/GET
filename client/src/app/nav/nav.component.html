@@ -1,0 +1,44 @@
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
+  <div class="container">
+    <a class="navbar-brand" routerLink="/" routerLinkActive="active">Get App</a>
+    <ul class="navbar-nav me-auto mb-2 mb-md-0">
+      <ng-container *ngIf="accountService.currentUser$ | async">
+        <li class="nav-item" >
+          <a class="nav-link"  routerLink="/allFlight" routerLinkActive="active">All flights</a>
+        </li>
+        <li class="nav-item" *ngIf="this.roleId == 2 ">
+          <a class="nav-link" routerLink="/insertFlight" routerLinkActive="active">Insert flight</a>
+        </li>
+        <li class="nav-item" *ngIf="this.roleId == 1 ">
+          <a class="nav-link" routerLink="/flightSearch" routerLinkActive="active">Search flight</a>
+        </li>
+        <li class="nav-item" *ngIf="this.roleId == 3">
+          <a class="nav-link" routerLink="/addUser" routerLinkActive="active">Add user</a>
+        </li>
+        <li class="nav-item" *ngIf="this.roleId == 1">
+          <a class="nav-link" routerLink="/myReservations" routerLinkActive="active">My reservations</a>
+        </li>
+        <li class="nav-item" *ngIf="this.roleId == 2">
+          <a class="nav-link" routerLink="/reservationApproved" routerLinkActive="active">Approve the reservation</a>
+        </li>
+     
+      </ng-container>
+    </ul>
+
+    <div class="dropdown" *ngIf="(accountService.currentUser$ | async) as user" dropdown>
+      <a class="dropdown-toggle text-light text-decoration-none" dropdownToggle>Welcome {{user.username | titlecase}}</a>
+      <div class="dropdown-menu" *dropdownMenu>
+        <a class="dropdown-item" (click)="logout()">Logout</a>
+      </div>
+
+    </div>
+
+    <form *ngIf="!(accountService.currentUser$ | async)" #loginForm="ngForm" class="d-flex" (ngSubmit)="login()"
+      autocomplete="off">
+      <input name="username" [(ngModel)]="model.username" class="form-control me-2" type="text" placeholder="Username">
+      <input name="password" [(ngModel)]="model.password" class="form-control me-2" type="password"
+        placeholder="Password">
+      <button class="btn btn-success" type="submit">Login</button>
+    </form>
+  </div>
+</nav>

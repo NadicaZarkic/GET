@@ -1,0 +1,71 @@
+<form [formGroup]="flightInsertForm" (ngSubmit)="flightInsertForm.valid && add()" autocomplete="off">
+    <h2 class="text-center text-primary">Add flight</h2>
+    <hr>
+        <div style="margin: 10px;">
+                <select
+                class="col-form-label" 
+                formControlName="placeOfDeparture"  >
+                <option value="">Choose place of departure</option>
+                <option  *ngFor="let city of City" >
+                {{ city }}
+                </option>
+            </select>
+        </div>
+
+        <div style="margin: 10px;">
+            <select
+            class="col-form-label" 
+            formControlName="placeOfArrival">
+            <option value="">Choose place of arrival</option>
+            <option  *ngFor="let city of City" >
+                {{ city }}
+            </option>
+            </select>
+        </div>
+ 
+
+            <label class="col-form-label">Date of flight: </label>
+            <input 
+                type="datetime-local" 
+                class="form-control ms-1" 
+                style="width: 300px" 
+                name="StartOfRent" 
+                formControlName="date">
+
+                <label class="col-form-label">Number of transfers: </label>
+                <input 
+                    type="number" 
+                    min="0"
+                    class="form-control ms-1" 
+                    style="width: 100px" 
+                    name="transfers" 
+                    formControlName="transfers">
+    
+                    <label class="col-form-label">Number of seats: </label>
+                <input 
+                    type="number" 
+                    min="0"
+                    class="form-control ms-1" 
+                    style="width: 100px" 
+                    name="seats" 
+                    formControlName="seats">
+
+                    
+
+
+    
+    <div class="row" *ngIf="validationErrors">
+        <ul class="text-danger">
+            <li *ngFor="let error of validationErrors">
+                {{error}}
+            </li>
+        </ul>
+    </div>
+
+  
+    <div class="text-center">
+        <button [disabled]="!flightInsertForm.valid" class="btn btn-success me-2" type="submit">Insert flight</button>
+       
+    </div>
+</form>
+
